@@ -1,0 +1,11 @@
+<p>task-list works!</p>
+
+<app-task-form (onTaskAdded)="addTask($event)"></app-task-form>
+
+<ul class="task-list" >
+  <li class="task-item" *ngFor="let task of tasks" (click)="selectTask(task)">
+    {{task.name}}
+  </li>
+</ul>
+
+<app-task-detail [selectedTask]="selectedTask"></app-task-detail>
