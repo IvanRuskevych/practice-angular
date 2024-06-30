@@ -3,11 +3,17 @@ import { NgForOf } from '@angular/common';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { ITask, Task } from '../task.model';
+import { HighlightDirective } from '../../directives/highlight.directive';
 
 @Component({
   selector: 'app-task-list',
   standalone: true,
-  imports: [TaskDetailComponent, TaskFormComponent, NgForOf],
+  imports: [
+    TaskDetailComponent,
+    TaskFormComponent,
+    NgForOf,
+    HighlightDirective,
+  ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',
 })
