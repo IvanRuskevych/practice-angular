@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TaskListComponent } from './task/task-list/task-list.component';
+
+import { TaskListComponent } from './task';
 
 @Component({
   selector: 'app-root',

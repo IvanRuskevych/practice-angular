@@ -1,6 +1,7 @@
 import { Component, Input } from '@angular/core';
-import { ITask } from '../task.model';
 import { NgIf } from '@angular/common';
+
+import { ITask } from '../index';
 
 @Component({
   selector: 'app-task-detail',

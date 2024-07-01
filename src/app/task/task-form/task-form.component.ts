@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormsModule } from '@angular/forms';
-import { ITask, Task } from '../task.model';
-import { TasksService } from '../../services/tasks.service';
+import { FormsModule } from '@angular/forms';
+
+import { TasksService } from '../../services';
+import { ITask, Task } from '../index';
 
 @Component({
   selector: 'app-task-form',

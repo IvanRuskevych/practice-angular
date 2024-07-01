@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ITask } from '../task/task.model';
+
+import { ITask } from '../task';
 
 @Injectable({
   providedIn: 'root',
