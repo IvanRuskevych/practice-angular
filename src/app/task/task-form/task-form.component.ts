@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormsModule } from '@angular/forms';
 import { ITask, Task } from '../task.model';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-task-form',
@@ -14,11 +15,14 @@ export class TaskFormComponent {
   // public newTask: ITask = new Task(0, '', '');
   public newTask: ITask = { ...this.initialTaskState };
 
+  constructor(private tasksService: TasksService) {}
+
   @Output() private onTaskAdded: EventEmitter<ITask> =
     new EventEmitter<ITask>();
 
   public addTask(): void {
-    this.onTaskAdded.emit(this.newTask);
+    // this.onTaskAdded.emit(this.newTask);
+    this.tasksService.addTask(this.newTask);
 
     this.newTask = { ...this.initialTaskState };
   }
