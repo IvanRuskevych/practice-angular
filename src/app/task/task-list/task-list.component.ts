@@ -4,6 +4,7 @@ import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
 import { ITask, Task } from '../task.model';
 import { HighlightDirective } from '../../directives/highlight.directive';
+import { KebabCasePipe } from '../../pipes/kebab-case.pipe';
 
 @Component({
   selector: 'app-task-list',
@@ -13,6 +14,7 @@ import { HighlightDirective } from '../../directives/highlight.directive';
     TaskFormComponent,
     NgForOf,
     HighlightDirective,
+    KebabCasePipe,
   ],
   templateUrl: './task-list.component.html',
   styleUrl: './task-list.component.scss',

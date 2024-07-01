@@ -5,7 +5,7 @@
 <ul class="task-list" >
 <!--  <li class="task-item" appHighlight color="red" *ngFor="let task of tasks" (click)="selectTask(task)">-->
   <li class="task-item" appHighlight="red" *ngFor="let task of tasks" (click)="selectTask(task)">
-    {{task.name}}
+    {{task.name | kebabCase}}
   </li>
 </ul>
 
