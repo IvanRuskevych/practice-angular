@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 import { TasksService } from '../../services';
 import { ITask, Task } from '../index';
@@ -12,11 +13,14 @@ import { ITask, Task } from '../index';
   styleUrl: './task-form.component.scss',
 })
 export class TaskFormComponent {
-  private readonly initialTaskState: ITask = new Task(0, '', '');
+  private readonly initialTaskState: ITask = new Task('', '');
   // public newTask: ITask = new Task(0, '', '');
   public newTask: ITask = { ...this.initialTaskState };
 
-  constructor(private tasksService: TasksService) {}
+  constructor(
+    private tasksService: TasksService,
+    private router: Router,
+  ) {}
 
   @Output() private onTaskAdded: EventEmitter<ITask> =
     new EventEmitter<ITask>();
@@ -26,5 +30,11 @@ export class TaskFormComponent {
     this.tasksService.addTask(this.newTask);
 
     this.newTask = { ...this.initialTaskState };
+
+    this.router.navigate(['']);
+  }
+
+  public navigateToBack(): void {
+    this.router.navigate(['']);
   }
 }

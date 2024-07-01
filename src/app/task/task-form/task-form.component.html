@@ -1,9 +1,9 @@
-<p>task-form works!</p>
+<button (click)="navigateToBack()" class="button">Back</button>
 
 <div class="task-form">
   <form>
     <input name="name" type="text" [(ngModel)]="newTask.name" placeholder="Title" >
     <textarea name="description"  [(ngModel)]="newTask.description" placeholder="Description"></textarea>
-    <button (click)="addTask()">Add task</button>
+    <button (click)="addTask()" class="button">Create task</button>
   </form>
 </div>

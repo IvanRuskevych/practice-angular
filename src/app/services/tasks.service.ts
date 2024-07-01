@@ -29,4 +29,8 @@ export class TasksService {
   public addTask(newTask: ITask): void {
     this.tasks = [...this.tasks, newTask];
   }
+
+  public getTaskById(id: string): ITask | undefined {
+    return this.tasks.find((t) => t.id === id);
+  }
 }

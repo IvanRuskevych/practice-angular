@@ -5,3 +5,16 @@
   margin: 10px 0;
   border-radius: 5px;
 }
+
+.button {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover{
+    background-color: #2980b9
+  }
+}

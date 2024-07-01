@@ -1,14 +1,17 @@
-<p>task-list works!</p>
-
 <!--<app-task-form (onTaskAdded)="addTask($event)"></app-task-form>-->
-<app-task-form></app-task-form>
+<!--<app-task-form></app-task-form>-->
+<button (click)="navigateToCreate()" class="button">Add task</button>
+
 
 <ul class="task-list" >
 <!--  <li class="task-item" appHighlight color="red" *ngFor="let task of tasks" (click)="selectTask(task)">-->
 <!--  <li class="task-item" appHighlight="red" *ngFor="let task of tasks" (click)="selectTask(task)">-->
-  <li class="task-item" appHighlight="red" *ngFor="let task of tasks$ | async" (click)="selectTask(task)">
+<!--  <li class="task-item" appHighlight="red" *ngFor="let task of tasks$ | async" (click)="selectTask(task)">-->
+
+  <li class="task-item" appHighlight="red" *ngFor="let task of tasks$ | async" (click)="navigateToTask(task.id)">
     {{task.name | kebabCase}}
+    {{task.id}}
   </li>
 </ul>
 
-<app-task-detail [selectedTask]="selectedTask"></app-task-detail>
+<!--<app-task-detail [selectedTask]="selectedTask"></app-task-detail>-->
