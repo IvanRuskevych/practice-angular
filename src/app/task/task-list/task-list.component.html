@@ -1,6 +1,6 @@
 <!--<app-task-form (onTaskAdded)="addTask($event)"></app-task-form>-->
 <!--<app-task-form></app-task-form>-->
-<button (click)="navigateToCreate()" class="button">Add task</button>
+<button type="button" (click)="navigateToCreate()" class="button">Add task</button>
 
 
 <ul class="task-list" >
@@ -11,7 +11,12 @@
   <li class="task-item" appHighlight="red" *ngFor="let task of tasks$ | async" (click)="navigateToTask(task.id)">
     {{task.name | kebabCase}}
     {{task.id}}
-  </li>
+
+    <div>
+    <button type="button" class="button" (click)="navigateToEdit(task.id)">Edit</button>
+    <button type="button" class="button" (click)="deleteTask(task.id, $event)">Delete</button>
+    </div>
+      </li>
 </ul>
 
 <!--<app-task-detail [selectedTask]="selectedTask"></app-task-detail>-->

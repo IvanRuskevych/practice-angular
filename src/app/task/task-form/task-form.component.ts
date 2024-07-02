@@ -1,9 +1,90 @@
-import { Component, EventEmitter, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+// import { Component, OnInit, signal } from '@angular/core';
+// import { FormsModule } from '@angular/forms';
+// import { ActivatedRoute, Router } from '@angular/router';
+//
+// import { ITask, Task } from '../index';
+// import { TasksApiService } from '../../services/tasks-api.service';
+//
+// @Component({
+//   selector: 'app-task-form',
+//   standalone: true,
+//   imports: [FormsModule],
+//   templateUrl: './task-form.component.html',
+//   styleUrl: './task-form.component.scss',
+// })
+// export class TaskFormComponent implements OnInit {
+//   private readonly initialTaskState: ITask = new Task('', '');
+//   public newTask: ITask = { ...this.initialTaskState };
+//
+//   isTaskCreate = signal<boolean>(false);
+//
+//   constructor(
+//     private tasksApiService: TasksApiService,
+//     private router: Router,
+//     private activatedRoute: ActivatedRoute,
+//   ) {}
+//
+//   public ngOnInit(): void {
+//     const taskId: string | null =
+//       this.activatedRoute.snapshot.paramMap.get('id');
+//
+//     if (taskId) {
+//       this.isTaskCreate.set(true);
+//
+//       this.tasksApiService
+//         .getTaskById(taskId)
+//         .subscribe((task) => (this.newTask = task));
+//     }
+//   }
+//
+//   private getTaskId(): string | null {
+//     return this.activatedRoute.snapshot.paramMap.get('id');
+//   }
+//
+//   private resetFormAndNavigate(): void {
+//     this.newTask = { ...this.initialTaskState };
+//     this.router.navigate(['']);
+//   }
+//
+//   public handleSubmitForm(): void {
+//     // @ts-ignore
+//     if (this.isTaskCreate) {
+//       this.createTask();
+//     } else {
+//       this.editTask();
+//     }
+//   }
+//
+//   public createTask(): void {
+//     this.tasksApiService.addNewTask(this.newTask).subscribe({
+//       next: () => {
+//         this.resetFormAndNavigate();
+//       },
+//     });
+//   }
+//
+//   public editTask(): void {
+//     this.tasksApiService
+//       .editTask(this.getTaskId() as string, this.newTask)
+//       .subscribe({
+//         next: () => {
+//           this.resetFormAndNavigate();
+//           this.isTaskCreate.set(false);
+//         },
+//       });
+//   }
+//
+//   public navigateToBack(): void {
+//     this.router.navigate(['']);
+//   }
+// }
 
-import { TasksService } from '../../services';
+import { Component, OnInit, signal } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+
 import { ITask, Task } from '../index';
+import { TasksApiService } from '../../services/tasks-api.service';
 
 @Component({
   selector: 'app-task-form',
@@ -12,26 +93,51 @@ import { ITask, Task } from '../index';
   templateUrl: './task-form.component.html',
   styleUrl: './task-form.component.scss',
 })
-export class TaskFormComponent {
+export class TaskFormComponent implements OnInit {
   private readonly initialTaskState: ITask = new Task('', '');
-  // public newTask: ITask = new Task(0, '', '');
   public newTask: ITask = { ...this.initialTaskState };
 
+  isTaskEdit = signal<boolean>(false);
+
   constructor(
-    private tasksService: TasksService,
+    private tasksApiService: TasksApiService,
     private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {}
 
-  @Output() private onTaskAdded: EventEmitter<ITask> =
-    new EventEmitter<ITask>();
+  public ngOnInit(): void {
+    const taskId: string | null =
+      this.activatedRoute.snapshot.paramMap.get('id');
+
+    if (taskId) {
+      this.isTaskEdit.set(true);
+
+      this.tasksApiService
+        .getTaskById(taskId)
+        .subscribe((task) => (this.newTask = task));
+    }
+  }
 
   public addTask(): void {
-    // this.onTaskAdded.emit(this.newTask);
-    this.tasksService.addTask(this.newTask);
+    if (this.isTaskEdit) {
+      const taskId: string | null =
+        this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.newTask = { ...this.initialTaskState };
-
-    this.router.navigate(['']);
+      this.tasksApiService.editTask(taskId as string, this.newTask).subscribe({
+        next: () => {
+          this.newTask = { ...this.initialTaskState };
+          this.router.navigate(['']);
+          this.isTaskEdit.set(false);
+        },
+      });
+    } else {
+      this.tasksApiService.addNewTask(this.newTask).subscribe({
+        next: () => {
+          this.newTask = { ...this.initialTaskState };
+          this.router.navigate(['']);
+        },
+      });
+    }
   }
 
   public navigateToBack(): void {
