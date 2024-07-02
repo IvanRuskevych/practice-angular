@@ -38,7 +38,7 @@ export class TaskFormComponent implements OnInit {
   }
 
   public addTask(): void {
-    if (this.isTaskEdit) {
+    if (this.isTaskEdit()) {
       const taskId: string | null =
         this.activatedRoute.snapshot.paramMap.get('id');
 
