@@ -1,3 +1,14 @@
 import { Routes } from '@angular/router';
 
-export const routes: Routes = [];
+import {
+  TaskListComponent,
+  TaskFormComponent,
+  TaskDetailComponent,
+} from './task';
+
+export const routes: Routes = [
+  { path: '', component: TaskListComponent },
+  { path: 'task-create', component: TaskFormComponent },
+  { path: 'task-edit/:id', component: TaskFormComponent },
+  { path: 'task/:id', component: TaskDetailComponent },
+];
