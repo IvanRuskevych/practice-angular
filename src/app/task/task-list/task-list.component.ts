@@ -1,15 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { AsyncPipe, NgForOf } from '@angular/common';
+import { Observable } from 'rxjs';
 
-import { TaskDetailComponent } from '../task-detail/task-detail.component';
-import { TaskFormComponent } from '../task-form/task-form.component';
-import { ITask } from '../index';
 import { HighlightDirective } from '../../directives';
 import { KebabCasePipe } from '../../pipes';
-import { Observable } from 'rxjs';
-import { TasksService } from '../../services';
-import { Router } from '@angular/router';
-import { TasksApiService } from '../../services/tasks-api.service';
+import { TasksService, TasksApiService } from '../../services';
+import { ITask } from '../index';
+import { TaskDetailComponent } from '../task-detail/task-detail.component';
+import { TaskFormComponent } from '../task-form/task-form.component';
 
 @Component({
   selector: 'app-task-list',
