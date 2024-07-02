@@ -2,8 +2,9 @@
 
 <ul class="task-list" >
   <li class="task-item" appHighlight="red" *ngFor="let task of tasks$ | async" (click)="navigateToTask(task.id)">
-    {{task.name | kebabCase}}
-    {{task.id}}
+    title: {{task.name | kebabCase}}
+    <br>
+    id: {{task.id}}
 
     <div>
        <button type="button" class="button" (click)="navigateToEdit(task.id)">Edit</button>

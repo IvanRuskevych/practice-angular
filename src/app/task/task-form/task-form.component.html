@@ -1,7 +1,7 @@
 <button (click)="navigateToBack()" class="button">Back</button>
 
 <div class="task-form">
-  <form (ngSubmit)="addTask()">
+  <form (ngSubmit)="handleFormSubmit()">
     <input name="name" type="text" [(ngModel)]="newTask.name" placeholder="Title" >
     <textarea name="description"  [(ngModel)]="newTask.description" placeholder="Description"></textarea>
     <button type="submit" class="button">{{isTaskEdit() ? "Edit task" : "Create task" }}</button>

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AsyncPipe, NgForOf } from '@angular/common';
 import { Observable } from 'rxjs';
 
@@ -9,6 +8,7 @@ import { TasksService, TasksApiService } from '../../services';
 import { ITask } from '../index';
 import { TaskDetailComponent } from '../task-detail/task-detail.component';
 import { TaskFormComponent } from '../task-form/task-form.component';
+import { UtilService } from '../../shared';
 
 @Component({
   selector: 'app-task-list',
@@ -29,8 +29,8 @@ export class TaskListComponent implements OnInit {
 
   constructor(
     private tasksService: TasksService,
-    private router: Router,
     private tasksApiService: TasksApiService,
+    private utilService: UtilService,
   ) {}
 
   public ngOnInit(): void {
@@ -40,15 +40,15 @@ export class TaskListComponent implements OnInit {
   }
 
   public navigateToCreate(): void {
-    this.router.navigate(['task-create']);
+    this.utilService.navigateTo(['task-create']);
   }
 
   public navigateToTask(id: string): void {
-    this.router.navigate(['task', id]);
+    this.utilService.navigateTo(['task', id]);
   }
 
   public navigateToEdit(id: string): void {
-    this.router.navigate(['task-edit', id]);
+    this.utilService.navigateTo(['task-edit', id]);
   }
 
   public deleteTask(id: string, event: Event): void {
